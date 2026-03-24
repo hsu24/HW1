@@ -86,3 +86,11 @@ use Streamlit Community Cloud
 - Removed `aiotdb.db` from `.gitignore` so the local populated SQL database snippet could be pushed to GitHub to serve as the static view for the demo.
 - Pushed the updated changes to the GitHub repository.
 - Directed the user to the direct 1-click Streamlit deployment URL.
+
+## 2026-03-24 21:10
+**Request:** 
+summarize all what we do and the live demo  into README.md
+
+**Actions:**
+- Created a comprehensive `README.md` outlining the project's architecture, local execution commands, and the live Streamlit dashboard demo URL.
+- Committed and pushed `README.md` and updated tracking logs to the remote GitHub repository.
