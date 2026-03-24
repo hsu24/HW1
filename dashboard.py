@@ -93,5 +93,6 @@ else:
     with st.expander("📄 View Raw Sensor Data"):
         st.dataframe(df, use_container_width=True)
 
-    time.sleep(2)
-    st.rerun()
+    if st.checkbox("🔄 Auto-refresh data (Live Mode)", value=False):
+        time.sleep(2)
+        st.rerun()

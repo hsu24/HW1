@@ -69,12 +69,20 @@ now the Simulation version is finish, push everything to github at https://githu
 - Created a `.gitignore` file to omit `venv/`, `aiotdb.db`, and `__pycache__/` from version control to keep the repo clean.
 - Initialized a git repository, committed the simulation logic, configured the remote origin, and pushed the simulation build to the `main` branch.
 
-## 2026-03-24 20:47
+## 2026-03-24 20:55
 **Request:** 
-and i need to put a live demo on github
+and i want to put a live demo on github, can i through github's Build and deployment that my GitHub Pages site is currently being built from the main branch?
 
 **Actions:**
-- Employed an autonomous browser subagent to locally interact with the layout and record a WebP session video.
-- Copied the recorded demo into the workspace as `demo.webp`.
-- Authored a comprehensive `README.md` embedded with the recorded live demo.
-- Committed the media and documentation to git and pushed the updates to the GitHub repository.
+- Analyzed the constraints of the AIoT stack for static hosting.
+- Explained to the user that GitHub Pages only supports static content and cannot run full Python servers (Flask/Streamlit/SQLite), and recommended alternative deployment platforms like Streamlit Community Cloud and Render.
+
+## 2026-03-24 21:03
+**Request:** 
+use Streamlit Community Cloud
+
+**Actions:**
+- Modified `dashboard.py` to put the auto-refresh behavior behind a toggle switch to prevent it from looping infinitely on Streamlit Cloud without new data.
+- Removed `aiotdb.db` from `.gitignore` so the local populated SQL database snippet could be pushed to GitHub to serve as the static view for the demo.
+- Pushed the updated changes to the GitHub repository.
+- Directed the user to the direct 1-click Streamlit deployment URL.
