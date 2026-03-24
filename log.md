@@ -68,3 +68,13 @@ now the Simulation version is finish, push everything to github at https://githu
 **Actions:**
 - Created a `.gitignore` file to omit `venv/`, `aiotdb.db`, and `__pycache__/` from version control to keep the repo clean.
 - Initialized a git repository, committed the simulation logic, configured the remote origin, and pushed the simulation build to the `main` branch.
+
+## 2026-03-24 20:47
+**Request:** 
+and i need to put a live demo on github
+
+**Actions:**
+- Employed an autonomous browser subagent to locally interact with the layout and record a WebP session video.
+- Copied the recorded demo into the workspace as `demo.webp`.
+- Authored a comprehensive `README.md` embedded with the recorded live demo.
+- Committed the media and documentation to git and pushed the updates to the GitHub repository.
