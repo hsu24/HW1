@@ -5,6 +5,7 @@ Welcome to the fully functional AIoT Sensor demonstration project. This reposito
 ### 🟢 Live Demo Snapshot
 You can view a working static snapshot of the UI deployed on Streamlit Community Cloud here:  
 👉 **[Live Streamlit Dashboard](https://l7fhemzvwjudcbosk5xndt.streamlit.app/)**
+<img width="1872" height="1060" alt="螢幕擷取畫面 2026-03-25 015710" src="https://github.com/user-attachments/assets/536a8837-15da-4df1-a261-cac2cdcfb618" />
 
 ---
 
