@@ -1,47 +1,64 @@
-# Local Python AIoT Demo 🌍
+# Local Python AIoT Workspace 🌍
 
-Welcome to the AIoT Sensor Dashboard demonstration project! 
+Welcome to the fully functional AIoT Sensor demonstration project. This repository contains both a software-only simulation environment and the code required to run the stack on real physical ESP32 hardware!
 
-### 🟢 Live Demo
+### 🟢 Live Demo Snapshot
 You can view a working static snapshot of the UI deployed on Streamlit Community Cloud here:  
 👉 **[Live Streamlit Dashboard](https://l7fhemzvwjudcbosk5xndt.streamlit.app/)**
 
 ---
 
-## Project Overview
+## Architecture Overview
 
-This project simulates an end-to-end AIoT (Artificial Intelligence of Things) system utilizing a local Python stack. It features an ESP32 simulator sending mock hardware telemetry to a Flask backend, which processes and stores the information in a database to be visualized by a modern Streamlit frontend.
+This project demonstrates an end-to-end AIoT system with the following framework:
+- **Backend API (`app.py`)**: A lightweight Flask server handling data ingestion at the `/sensor` endpoint. It parses incoming HTTP POST JSON data.
+- **Database (`aiotdb.db`)**: A local SQLite database storing all timestamped metrics in a `sensors` table.
+- **Frontend Dashboard (`dashboard.py`)**: A professionally styled Streamlit application that fetches the latest 60 readings from the database, displaying dynamic KPI metric cards, raw data tables, and `st.line_chart` visualizations for temperature and humidity.
 
-### Architecture
-- **Simulator (`esp32_sim.py`)**: A Python script simulating an ESP32 microcontroller. It generates dummy DHT11 temperature and humidity sensor data alongside Wi-Fi metadata (IP address, RSSI) and pushes it over HTTP POST every 5 seconds.
-- **Backend API (`app.py`)**: A lightweight Flask server handling data ingestion at the `/sensor` endpoint and routing it directly to structured storage. It also exposes a `/health` endpoint for uptime monitoring.
-- **Database (`aiotdb.db`)**: A local SQLite3 database persisting all timestamped metrics in a `sensors` table.
-- **Frontend Dashboard (`dashboard.py`)**: A professional web application built in Streamlit. It fetches the latest 60 readings from the database and renders dynamic KPI metric cards alongside clean, full-width `st.line_chart` visualizations for both temperature and humidity trends.
+---
+
+## Deployment Modes
+
+The beauty of this architecture is that the **same Backend API and Dashboard frontend work seamlessly for both the simulation AND the real hardware!** You do not need to rewrite the server architecture to switch between modes.
+
+### Mode 1: Simulation Version
+*Ideal for testing the UI, API, and database without spinning up physical hardware.*
+
+- **Hardware Requirement**: None.
+- **Data Source**: `esp32_sim.py`
+  - A Python script generating randomized dummy DHT11 temperature/humidity data. It runs locally and automatically pushes this generated data to the Flask API every 5 seconds.
+
+### Mode 2: Real Hardware Version
+*Ideal for real-world live IoT deployment.*
+
+- **Hardware Requirement**: ESP32 Microcontroller + DHT11 Sensor.
+- **Data Source**: `esp32_real.cpp`
+  - A C++ script utilizing `WiFi.h`, `HTTPClient.h`, and the `SimpleDHT11` library to capture real-world environmental data and POST it directly over Wi-Fi to your Flask backend.
+  - Accompanied by `platformio.ini` which handles the ESP32 framework dependencies natively.
+
+---
 
 ## How to Run Locally
 
-If you clone this repository and want to run the full simulation stack on your local machine:
+If you cloned this repository and want to run it on your local network:
 
-1. **Set up the environment**:
+1. **Set up the Python Environment**:
    ```bash
    python -m venv venv
    .\venv\Scripts\Activate.ps1
    pip install -r requirements.txt
    ```
 
-2. **Start the Backend API**:
+2. **Start the Central Backend API** (Keep this running):
    ```bash
    python app.py
    ```
-   *(Runs on http://localhost:5000)*
 
-3. **Start the ESP32 Simulator** (in a new terminal):
-   ```bash
-   python esp32_sim.py
-   ```
-
-4. **Start the Dashboard** (in a new terminal):
+3. **Start the Streamlit Dashboard** (Keep this running in a second terminal):
    ```bash
    streamlit run dashboard.py
    ```
-   *(Runs on http://localhost:8501)*
+
+4. **Choose your Data Source**:
+   - **For Simulation**: Open a third terminal window and run `python esp32_sim.py`.
+   - **For Real Hardware**: Update `esp32_real.cpp` with your Wi-Fi credentials and your computer's local IP address, flash the code to your ESP32 board via PlatformIO or the Arduino IDE, and watch the physical device begin logging data live to your Streamlit dashboard!
