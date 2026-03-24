@@ -1,18 +1,21 @@
-import sqlite3
+import os
 import pandas as pd
 import streamlit as st
 import time
+from sqlalchemy import create_engine
 
-DB_NAME = 'aiotdb.db'
+DB_URL = os.environ.get("DATABASE_URL", "sqlite:///aiotdb.db")
+if DB_URL.startswith("postgres://"):
+    DB_URL = DB_URL.replace("postgres://", "postgresql://", 1)
+
+engine = create_engine(DB_URL)
 
 def load_data():
     try:
-        conn = sqlite3.connect(DB_NAME)
         # Limit to the most recent 60 readings
-        df = pd.read_sql_query("SELECT * FROM sensors ORDER BY timestamp DESC LIMIT 60", conn)
-        conn.close()
+        df = pd.read_sql_query("SELECT * FROM sensors ORDER BY timestamp DESC LIMIT 60", engine)
         return df
-    except sqlite3.OperationalError:
+    except Exception:
         return pd.DataFrame()
 
 st.set_page_config(page_title="AIoT Dashboard", page_icon="🌍", layout="wide")
@@ -93,6 +96,5 @@ else:
     with st.expander("📄 View Raw Sensor Data"):
         st.dataframe(df, use_container_width=True)
 
-    if st.checkbox("🔄 Auto-refresh data (Live Mode)", value=False):
-        time.sleep(2)
-        st.rerun()
+    time.sleep(2)
+    st.rerun()

@@ -2,4 +2,6 @@ flask
 streamlit
 requests
 pandas
-plotly
+SQLAlchemy
+psycopg2-binary
+gunicorn
