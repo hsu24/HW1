@@ -86,3 +86,12 @@ help me set up Option 1
 - Removed `aiotdb.db` from `.gitignore`.
 - Committed and pushed the populated local SQLite database to GitHub to serve as the backend for the Streamlit Cloud deployment.
 - Instructed the user on finalizing deployment via share.streamlit.io.
+
+## 2026-03-25 00:49
+**Request:** 
+now i got my URL: https://l7fhemzvwjudcbosk5xndt.streamlit.app/. summarize all we do and add the live demo to README.md
+
+**Actions:**
+- Created `README.md` summarizing the project architecture, features, and local rerun instructions.
+- Added the public Streamlit Live Demo URL prominently to the top of the README.
+- Committed and pushed the updated documentation (including this log) to GitHub.
